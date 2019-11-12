@@ -12,8 +12,8 @@ class TasksController < ApplicationController
   end
 
   def create
-    raise
     @task = Task.create(task_params)
+    redirect_to task_path(@task)
   end
 
   def edit
@@ -22,10 +22,14 @@ class TasksController < ApplicationController
 
   def update
     @task = Task.find(params[:id])
+    @task.update(task_params)
+    redirect_to task_path(@task)
   end
 
   def destroy
     @task = Task.find(params[:id])
+    @task.destroy
+    redirect_to task_path
   end
 
   private
